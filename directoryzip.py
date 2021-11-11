@@ -1,6 +1,6 @@
 import os
 import zipfile
- 
+import easygui
  
 # Declare the function to return all file paths of the particular directory
 def retrieve_file_paths(dirName):
@@ -22,7 +22,7 @@ def retrieve_file_paths(dirName):
 # Declare the main function
 def main():
 # Assign the name of the directory to zip
-  dir_name = 'blank_dir' #Rename the Directory name with the direcotry that you want to compress
+  dir_name = easygui.diropenbox() #Rename the Directory name with the direcotry that you want to compress
    
   # Call the function to retrieve all files and folders of the assigned directory
   filePaths = retrieve_file_paths(dir_name)
