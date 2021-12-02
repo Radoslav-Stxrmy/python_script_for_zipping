@@ -1,7 +1,16 @@
 import os
 import zipfile
 import easygui
- 
+import PySimpleGUI as sg
+
+
+
+layout = [[sg.Text("Press Open and select the Dir you want to zip")], [sg.Button("Open")], [sg.Button("Close")]]
+
+# Create the window
+window = sg.Window("Directory Zip", layout)
+
+
 # Declare the function to return all file paths of the particular directory
 def retrieve_file_paths(dirName):
  
@@ -43,4 +52,14 @@ def main():
    
 # Call the main function
 if __name__ == "__main__":
-  main()
+  while True:
+    event, values = window.read()
+    if event == "Open":
+      main()
+      window.close()
+    elif event == sg.WIN_CLOSED:
+      print('Have a nice day !')
+      break
+    elif event == "Close":
+      print('Have a nice day !')
+      break
