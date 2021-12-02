@@ -1,13 +1,12 @@
 import os
+from traceback import TracebackException
 import zipfile
 import easygui
 import PySimpleGUI as sg
 
 
-
+sg.theme('DarkPurple4')
 layout = [[sg.Text("Press Open and select the Dir you want to zip")], [sg.Button("Open")], [sg.Button("Close")]]
-
-# Create the window
 window = sg.Window("Directory Zip", layout)
 
 
@@ -31,25 +30,27 @@ def retrieve_file_paths(dirName):
 # Declare the main function
 def main():
 # Assign the name of the directory to zip
-    dir_name = easygui.diropenbox() #Rename the Directory name with the direcotry that you want to compress
+    try:
+        dir_name = easygui.diropenbox() #Rename the Directory name with the direcotry that you want to compress
      
-    # Call the function to retrieve all files and folders of the assigned directory
-    filePaths = retrieve_file_paths(dir_name)
-     
-    # printing the list of all files to be zipped
-    print('The following list of files will be zipped:')
-    for fileName in filePaths:
-        print(fileName)
-         
-    # writing files to a zipfile
-    zip_file = zipfile.ZipFile(dir_name+'.zip', 'w')
-    with zip_file:
-        # writing each file one by one
-        for file in filePaths:
-            zip_file.write(file)
-             
-    print(dir_name+'.zip file is created successfully!')
-
+        # Call the function to retrieve all files and folders of the assigned directory
+        filePaths = retrieve_file_paths(dir_name)
+        
+        # printing the list of all files to be zipped
+        print('The following list of files will be zipped:')
+        for fileName in filePaths:
+            print(fileName)
+            
+        # writing files to a zipfile
+        zip_file = zipfile.ZipFile(dir_name+'.zip', 'w')
+        with zip_file:
+            # writing each file one by one
+            for file in filePaths:
+                zip_file.write(file)
+                
+        print(dir_name+'.zip file is created successfully!')
+    except TypeError:
+        print("Lame, Imagine closing the program like that :D")
 # Call the main function
 if __name__ == "__main__":
     while True:
